@@ -1,4 +1,4 @@
-# kids-game — Ucimo zajedno!
+# kids-game — 
 
 An educational desktop application for children in grades 1–4 with ADHD and dyslexia, built in collaboration with Vista ADHD Center in Rijeka.
 
