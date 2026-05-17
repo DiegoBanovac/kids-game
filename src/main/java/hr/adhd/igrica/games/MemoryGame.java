@@ -21,16 +21,16 @@ import java.util.List;
 
 public class MemoryGame extends BaseGame {
 
-    // Each pair: [letter, emoji, Croatian word hint]
+    // Each pair: [letter, Croatian word]
     private static final String[][] PAIRS = {
-        {"A", "✈️", "avion"},
-        {"B", "🍌", "banana"},
-        {"M", "🐱", "mačka"},
-        {"S", "☀️", "sunce"},
-        {"L", "⚽", "lopta"},
-        {"P", "🐶", "pas"},
-        {"R", "🐟", "riba"},
-        {"T", "🎂", "torta"}
+        {"A", "Avion"},
+        {"B", "Brod"},
+        {"M", "Macka"},
+        {"S", "Sunce"},
+        {"L", "Lopta"},
+        {"P", "Pas"},
+        {"R", "Riba"},
+        {"T", "Torta"}
     };
 
     private final List<CardView> cards = new ArrayList<>();
@@ -45,12 +45,12 @@ public class MemoryGame extends BaseGame {
         super(session, audioManager);
     }
 
-    @Override public String getGameTitle()  { return "🃏 Sparivanje slova"; }
+    @Override public String getGameTitle()  { return "◆ Povezivanje slova"; }
     @Override protected GameType getGameType() { return GameType.MEMORY; }
 
     @Override
     public Parent buildLayout() {
-        instructionLabel = new Label("Pronađi parove: slovo  slika!");
+        instructionLabel = new Label("Pronadi parove: slovo  rijec!");
         instructionLabel.getStyleClass().add("instruction-label");
 
         VBox content = new VBox(12, instructionLabel, buildCardGrid());
@@ -66,8 +66,8 @@ public class MemoryGame extends BaseGame {
     private GridPane buildCardGrid() {
         List<CardData> data = new ArrayList<>();
         for (int i = 0; i < PAIRS.length; i++) {
-            data.add(new CardData(i, true, PAIRS[i][0], ""));
-            data.add(new CardData(i, false, PAIRS[i][1], PAIRS[i][2]));
+            data.add(new CardData(i, true,  PAIRS[i][0]));
+            data.add(new CardData(i, false, PAIRS[i][1]));
         }
         Collections.shuffle(data);
 
@@ -124,7 +124,7 @@ public class MemoryGame extends BaseGame {
             matchesFound++;
             starSystem.addStars(1);
             audioManager.playCorrect();
-            instructionLabel.setText("Bravo! ⭐  Nađeno " + matchesFound + " / " + PAIRS.length + " parova!");
+            instructionLabel.setText("Bravo! ★  Nadeno " + matchesFound + " / " + PAIRS.length + " parova!");
 
             if (matchesFound == PAIRS.length) {
                 PauseTransition end = new PauseTransition(Duration.millis(700));
@@ -135,9 +135,9 @@ public class MemoryGame extends BaseGame {
             firstFlipped.flip(false);
             secondFlipped.flip(false);
             audioManager.playWrong();
-            instructionLabel.setText("❌ Nije par, pokušaj ponovo!");
+            instructionLabel.setText("✗ Nije par, pokusaj ponovo!");
             PauseTransition reset = new PauseTransition(Duration.millis(1200));
-            reset.setOnFinished(e -> instructionLabel.setText("Pronađi parove: slovo  slika!"));
+            reset.setOnFinished(e -> instructionLabel.setText("Pronadi parove: slovo  rijec!"));
             reset.play();
         }
         firstFlipped = null;
@@ -156,7 +156,7 @@ public class MemoryGame extends BaseGame {
 
     // ---- Data record ----
 
-    private record CardData(int pairId, boolean isLetter, String display, String hint) {}
+    private record CardData(int pairId, boolean isLetter, String display) {}
 
     // ---- CardView inner class ----
 
@@ -183,9 +183,9 @@ public class MemoryGame extends BaseGame {
 
             Label frontMain = new Label(data.display());
             if (data.isLetter()) {
-                frontMain.setStyle("-fx-font-size: 46px; -fx-text-fill: #1A237E; -fx-font-weight: bold;");
+                frontMain.setStyle("-fx-font-size: 48px; -fx-text-fill: #2C3E8C; -fx-font-weight: bold;");
             } else {
-                frontMain.setStyle("-fx-font-size: 38px;");
+                frontMain.setStyle("-fx-font-size: 20px; -fx-text-fill: #7B3FA0; -fx-font-weight: bold;");
             }
             frontFace = new StackPane(frontMain);
             frontFace.getStyleClass().addAll("card", "card-front");

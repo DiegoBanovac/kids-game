@@ -39,7 +39,7 @@ public class ReactionGame extends BaseGame {
         super(session, audioManager);
     }
 
-    @Override public String getGameTitle()     { return "⭐ Klikni zvjezdicu"; }
+    @Override public String getGameTitle()     { return "★ Klikni zvjezdicu"; }
     @Override protected GameType getGameType() { return GameType.REACTION; }
 
     @Override
@@ -50,14 +50,14 @@ public class ReactionGame extends BaseGame {
         feedbackLabel = new Label("Klikni zvjezdicu što brže možeš!");
         feedbackLabel.getStyleClass().add("status-label");
 
-        starLabel = new Label("⭐");
-        starLabel.setStyle("-fx-font-size: 88px; -fx-cursor: hand;");
+        starLabel = new Label("★");
+        starLabel.setStyle("-fx-font-size: 88px; -fx-cursor: hand; -fx-text-fill: #FFB300;");
         starLabel.setVisible(false);
         starLabel.setOnMouseClicked(e -> handleClick());
 
         gamePane = new Pane(starLabel);
         gamePane.setPrefSize(860, 480);
-        gamePane.setStyle("-fx-background-color: #FDFAF0; -fx-background-radius: 12px;");
+        gamePane.setStyle("-fx-background-color: transparent;");
 
         VBox top = new VBox(6, roundLabel, feedbackLabel);
         top.setAlignment(Pos.CENTER);
@@ -115,7 +115,7 @@ public class ReactionGame extends BaseGame {
         appear.setToValue(1);
         appear.play();
 
-        feedbackLabel.setText("Klikni! ⭐");
+        feedbackLabel.setText("Klikni! ★");
         roundStart = System.currentTimeMillis();
 
         timeout = new PauseTransition(Duration.millis(TIMEOUT_MS));
@@ -139,7 +139,7 @@ public class ReactionGame extends BaseGame {
 
         audioManager.playCorrect();
         starSystem.addStars(1);
-        feedbackLabel.setText("✅ " + rt + " ms! Bravo!");
+        feedbackLabel.setText("✓ " + rt + " ms! Bravo!");
 
         PauseTransition gap = new PauseTransition(Duration.millis(600));
         gap.setOnFinished(e -> {
@@ -153,7 +153,7 @@ public class ReactionGame extends BaseGame {
         reactionTimes.add(TIMEOUT_MS);
         starLabel.setVisible(false);
         audioManager.playWrong();
-        feedbackLabel.setText("⏱ Presporo! Pokušaj brže!");
+        feedbackLabel.setText("Presporo! Pokusaj brze!");
 
         PauseTransition gap = new PauseTransition(Duration.millis(800));
         gap.setOnFinished(e -> nextRound());

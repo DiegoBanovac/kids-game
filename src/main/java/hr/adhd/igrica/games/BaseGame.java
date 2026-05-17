@@ -44,12 +44,12 @@ public abstract class BaseGame {
 
     protected HBox buildHeader() {
         Label title = new Label(getGameTitle());
-        title.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;");
 
         HBox spacer = new HBox();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        Button homeBtn = new Button("🏠 Izbornik");
+        Button homeBtn = new Button("< Izbornik");
         homeBtn.getStyleClass().add("home-button");
         homeBtn.setOnAction(e -> SceneManager.showStartScreen());
 

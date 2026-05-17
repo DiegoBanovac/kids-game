@@ -51,7 +51,7 @@ public class ColorSequenceGame extends BaseGame {
         super(session, audioManager);
     }
 
-    @Override public String getGameTitle()     { return "🌈 Ponavljanje boja"; }
+    @Override public String getGameTitle()     { return "● Ponavljanje boja"; }
     @Override protected GameType getGameType() { return GameType.COLOR_SEQUENCE; }
 
     @Override
@@ -108,7 +108,7 @@ public class ColorSequenceGame extends BaseGame {
     private void playSequence() {
         playerTurn = false;
         roundLabel.setText("Runda " + (roundsDone + 1) + " / " + TOTAL_ROUNDS);
-        statusLabel.setText("👀 Gledaj!");
+        statusLabel.setText("Gledaj!");
         playNextFlash(0);
     }
 
@@ -116,7 +116,7 @@ public class ColorSequenceGame extends BaseGame {
         if (idx >= sequence.size()) {
             playerTurn  = true;
             playerIndex = 0;
-            statusLabel.setText("👆 Tvoj red! Ponovi niz!");
+            statusLabel.setText("Tvoj red! Ponovi niz!");
             return;
         }
         int ci = sequence.get(idx);
@@ -149,7 +149,7 @@ public class ColorSequenceGame extends BaseGame {
                 playerTurn = false;
                 roundsDone++;
                 starSystem.addStars(1);
-                statusLabel.setText("✅ Točno! Bravo! ⭐");
+                statusLabel.setText("✓ Tocno! Bravo! ★");
 
                 if (roundsDone == TOTAL_ROUNDS) {
                     PauseTransition end = new PauseTransition(Duration.millis(900));
@@ -166,7 +166,7 @@ public class ColorSequenceGame extends BaseGame {
             // wrong input
             playerTurn = false;
             audioManager.playWrong();
-            statusLabel.setText("❌ Netočno! Gledaj ponovo...");
+            statusLabel.setText("✗ Netocno! Gledaj ponovo...");
             for (Circle c : circles) c.setFill(Color.web("#FFCDD2"));
 
             PauseTransition retry = new PauseTransition(Duration.millis(1000));

@@ -2,7 +2,6 @@ package hr.adhd.igrica.screens;
 
 import hr.adhd.igrica.util.GameType;
 import hr.adhd.igrica.util.SceneManager;
-import hr.adhd.igrica.util.TtsManager;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 import javafx.geometry.Insets;
@@ -28,51 +27,47 @@ public class EndScreen {
     }
 
     public Parent buildLayout() {
-        Label bravoLabel = new Label("Bravo! 🎉");
+        Label bravoLabel = new Label("Bravo!");
         bravoLabel.getStyleClass().add("end-title");
 
-        Label earnedLabel = new Label("Zaradio/la si  " + starsEarned + " ⭐");
-        earnedLabel.setStyle("-fx-font-size: 34px; -fx-text-fill: #333; -fx-font-weight: bold;");
+        Label earnedLabel = new Label("Zaradio/la si  " + starsEarned + " ★");
+        earnedLabel.getStyleClass().add("end-earned");
 
-        // animated star row
         HBox starRow = buildStarRow(starsEarned);
 
-        Label totalLabel = new Label("Ukupno zvjezdica:  " + totalStars + " ⭐");
-        totalLabel.setStyle("-fx-font-size: 26px; -fx-text-fill: #555;");
+        Label totalLabel = new Label("Ukupno zvjezdica:  " + totalStars + " ★");
+        totalLabel.getStyleClass().add("end-total");
 
-        Button replayBtn = new Button("▶  Igraj opet");
+        Button replayBtn = new Button("►  Igraj opet");
         replayBtn.getStyleClass().add("replay-button");
-        replayBtn.setOnAction(e -> {
-            TtsManager.speak("Igramo opet!");
-            SceneManager.showGame(lastGame);
-        });
+        replayBtn.setOnAction(e -> SceneManager.showGame(lastGame));
 
-        Button menuBtn = new Button("🏠  Odaberi igru");
+        Button menuBtn = new Button("Odaberi igru");
         menuBtn.getStyleClass().add("menu-button");
         menuBtn.setOnAction(e -> SceneManager.showStartScreen());
 
         HBox buttons = new HBox(24, replayBtn, menuBtn);
         buttons.setAlignment(Pos.CENTER);
 
-        VBox content = new VBox(20, bravoLabel, earnedLabel, starRow, totalLabel, buttons);
-        content.setAlignment(Pos.CENTER);
-        content.setPadding(new Insets(40));
+        VBox panel = new VBox(22, bravoLabel, earnedLabel, starRow, totalLabel, buttons);
+        panel.setAlignment(Pos.CENTER);
+        panel.getStyleClass().add("end-panel");
+        panel.setMaxWidth(540);
+        panel.setPadding(new Insets(50, 60, 50, 60));
 
-        StackPane root = new StackPane(content);
-        root.setStyle("-fx-background-color: #FDFAF0;");
-
-        TtsManager.speak("Bravo! Zaradio si " + starsEarned + " zvjezdica!");
+        StackPane root = new StackPane(panel);
+        root.getStyleClass().add("root-bg");
         return root;
     }
 
     private HBox buildStarRow(int count) {
-        HBox row = new HBox(10);
+        HBox row = new HBox(12);
         row.setAlignment(Pos.CENTER);
         SequentialTransition seq = new SequentialTransition();
 
         for (int i = 0; i < Math.max(count, 1); i++) {
-            Label star = new Label("⭐");
-            star.setStyle("-fx-font-size: 52px;");
+            Label star = new Label("★");
+            star.getStyleClass().add("end-star");
             star.setScaleX(0);
             star.setScaleY(0);
             row.getChildren().add(star);
