@@ -1,7 +1,7 @@
 /* ===== BASE ===== */
 
 .root {
-    -fx-font-family: "Arial Rounded MT Bold", "Comic Sans MS", "Segoe UI", sans-serif;
+    -fx-font-family: "Segoe UI", "Trebuchet MS", "Arial", sans-serif;
     -fx-font-size: 18px;
 }
 
@@ -26,19 +26,19 @@
 }
 
 .subtitle-label {
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-text-fill: #6B7280;
-    -fx-padding: 0 0 8 0;
+    -fx-padding: 0 0 6 0;
 }
 
 /* ===== GAME BUTTONS (start screen) ===== */
 
 .game-button {
     -fx-text-fill: white;
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
     -fx-min-width: 340px;
-    -fx-min-height: 72px;
+    -fx-min-height: 68px;
     -fx-background-radius: 20px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 10, 0, 2, 4);
@@ -50,32 +50,53 @@
     -fx-scale-y: 0.96;
 }
 
-.btn-purple {
-    -fx-background-color: #7B61FF;
-}
+.btn-purple { -fx-background-color: #7B61FF; }
 .btn-purple:hover {
     -fx-background-color: #6A50EE;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
 }
 
-.btn-blue {
-    -fx-background-color: #2196F3;
-}
+.btn-blue { -fx-background-color: #2196F3; }
 .btn-blue:hover {
     -fx-background-color: #1976D2;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
 }
 
-.btn-orange {
-    -fx-background-color: #FF6B35;
-}
+.btn-orange { -fx-background-color: #FF6B35; }
 .btn-orange:hover {
     -fx-background-color: #E85A24;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
 }
+
+/* ===== DYSLEXIA TOGGLE ===== */
+
+.dyslexia-toggle {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-min-width: 340px;
+    -fx-min-height: 48px;
+    -fx-background-radius: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 8 24 8 24;
+}
+
+.dyslexia-off {
+    -fx-background-color: #E5E7EB;
+    -fx-text-fill: #6B7280;
+}
+.dyslexia-off:hover { -fx-background-color: #D1D5DB; }
+
+.dyslexia-on {
+    -fx-background-color: #D1FAE5;
+    -fx-text-fill: #065F46;
+    -fx-border-color: #22C55E;
+    -fx-border-width: 2px;
+    -fx-border-radius: 14px;
+}
+.dyslexia-on:hover { -fx-background-color: #A7F3D0; }
 
 /* ===== HEADER BAR ===== */
 
@@ -86,7 +107,7 @@
 .home-button {
     -fx-background-color: rgba(255, 255, 255, 0.18);
     -fx-text-fill: white;
-    -fx-font-size: 16px;
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-background-radius: 12px;
     -fx-cursor: hand;
@@ -95,10 +116,7 @@
     -fx-border-width: 1.5px;
     -fx-border-radius: 12px;
 }
-
-.home-button:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.30);
-}
+.home-button:hover { -fx-background-color: rgba(255, 255, 255, 0.30); }
 
 /* ===== MEMORY CARDS ===== */
 
@@ -112,7 +130,6 @@
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4355C8, #2D3E9F);
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 7, 0, 1, 3);
 }
-
 .card-back:hover {
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #5365D8, #3D4EAF);
     -fx-scale-x: 1.06;
@@ -157,7 +174,7 @@
 }
 
 .round-label {
-    -fx-font-size: 22px;
+    -fx-font-size: 20px;
     -fx-text-fill: #6B7280;
     -fx-font-weight: bold;
 }
@@ -178,13 +195,13 @@
 }
 
 .end-earned {
-    -fx-font-size: 30px;
+    -fx-font-size: 28px;
     -fx-text-fill: #374151;
     -fx-font-weight: bold;
 }
 
 .end-total {
-    -fx-font-size: 22px;
+    -fx-font-size: 20px;
     -fx-text-fill: #6B7280;
     -fx-font-weight: bold;
 }
@@ -197,45 +214,35 @@
 .replay-button {
     -fx-background-color: #22C55E;
     -fx-text-fill: white;
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-min-width: 220px;
-    -fx-min-height: 64px;
+    -fx-min-width: 210px;
+    -fx-min-height: 60px;
     -fx-background-radius: 18px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(34,197,94,0.35), 10, 0, 2, 4);
 }
-
 .replay-button:hover {
     -fx-background-color: #16A34A;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
 }
-
-.replay-button:pressed {
-    -fx-scale-x: 0.96;
-    -fx-scale-y: 0.96;
-}
+.replay-button:pressed { -fx-scale-x: 0.96; -fx-scale-y: 0.96; }
 
 .menu-button {
     -fx-background-color: #FF6B35;
     -fx-text-fill: white;
-    -fx-font-size: 24px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-min-width: 220px;
-    -fx-min-height: 64px;
+    -fx-min-width: 210px;
+    -fx-min-height: 60px;
     -fx-background-radius: 18px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(255,107,53,0.35), 10, 0, 2, 4);
 }
-
 .menu-button:hover {
     -fx-background-color: #E85A24;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
 }
-
-.menu-button:pressed {
-    -fx-scale-x: 0.96;
-    -fx-scale-y: 0.96;
-}
+.menu-button:pressed { -fx-scale-x: 0.96; -fx-scale-y: 0.96; }

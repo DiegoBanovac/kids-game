@@ -3,7 +3,6 @@ package hr.adhd.igrica.games;
 import hr.adhd.igrica.util.AudioManager;
 import hr.adhd.igrica.util.GameSession;
 import hr.adhd.igrica.util.GameType;
-import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,16 +20,16 @@ import java.util.List;
 
 public class MemoryGame extends BaseGame {
 
-    // Each pair: [letter, Croatian word]
+    // Each pair: [letter, emoji]
     private static final String[][] PAIRS = {
-        {"A", "Avion"},
-        {"B", "Brod"},
-        {"M", "Macka"},
-        {"S", "Sunce"},
-        {"L", "Lopta"},
-        {"P", "Pas"},
-        {"R", "Riba"},
-        {"T", "Torta"}
+        {"A", "✈"},   // ✈ avion
+        {"B", "⛵"},   // ⛵ brod
+        {"M", "🐱"}, // 🐱 macka
+        {"S", "☀"},   // ☀ sunce
+        {"L", "⚽"},   // ⚽ lopta
+        {"P", "🐶"}, // 🐶 pas
+        {"R", "🐟"}, // 🐟 riba
+        {"T", "🎂"}  // 🎂 torta
     };
 
     private final List<CardView> cards = new ArrayList<>();
@@ -50,7 +49,7 @@ public class MemoryGame extends BaseGame {
 
     @Override
     public Parent buildLayout() {
-        instructionLabel = new Label("Pronadi parove: slovo  rijec!");
+        instructionLabel = new Label("Pronađi parove: slovo i slika!");
         instructionLabel.getStyleClass().add("instruction-label");
 
         VBox content = new VBox(12, instructionLabel, buildCardGrid());
@@ -111,9 +110,7 @@ public class MemoryGame extends BaseGame {
         } else {
             secondFlipped = card;
             isChecking = true;
-            PauseTransition pause = new PauseTransition(Duration.millis(900));
-            pause.setOnFinished(e -> checkMatch());
-            pause.play();
+            delay(Duration.millis(900), this::checkMatch).play();
         }
     }
 
@@ -124,21 +121,17 @@ public class MemoryGame extends BaseGame {
             matchesFound++;
             starSystem.addStars(1);
             audioManager.playCorrect();
-            instructionLabel.setText("Bravo! ★  Nadeno " + matchesFound + " / " + PAIRS.length + " parova!");
+            instructionLabel.setText("Bravo! ★  Nađeno " + matchesFound + " / " + PAIRS.length + " parova!");
 
             if (matchesFound == PAIRS.length) {
-                PauseTransition end = new PauseTransition(Duration.millis(700));
-                end.setOnFinished(e -> finishGame());
-                end.play();
+                delay(Duration.millis(700), this::finishGame).play();
             }
         } else {
             firstFlipped.flip(false);
             secondFlipped.flip(false);
             audioManager.playWrong();
-            instructionLabel.setText("✗ Nije par, pokusaj ponovo!");
-            PauseTransition reset = new PauseTransition(Duration.millis(1200));
-            reset.setOnFinished(e -> instructionLabel.setText("Pronadi parove: slovo  rijec!"));
-            reset.play();
+            instructionLabel.setText("✗ Nije par, pokušaj ponovo!");
+            delay(Duration.millis(1200), () -> instructionLabel.setText("Pronađi parove: slovo i slika!")).play();
         }
         firstFlipped = null;
         secondFlipped = null;
@@ -185,7 +178,7 @@ public class MemoryGame extends BaseGame {
             if (data.isLetter()) {
                 frontMain.setStyle("-fx-font-size: 48px; -fx-text-fill: #2C3E8C; -fx-font-weight: bold;");
             } else {
-                frontMain.setStyle("-fx-font-size: 20px; -fx-text-fill: #7B3FA0; -fx-font-weight: bold;");
+                frontMain.setStyle("-fx-font-size: 38px; -fx-font-family: 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;");
             }
             frontFace = new StackPane(frontMain);
             frontFace.getStyleClass().addAll("card", "card-front");

@@ -1,0 +1,88 @@
+/* ===== DYSLEXIA MODE OVERRIDES =====
+   Loaded on top of main.css when dyslexia mode is active.
+   Uses Comic Sans MS: irregular letterforms help dyslexic readers
+   distinguish similar-looking letters (b/d, p/q, etc.).
+   Larger fonts, warm cream background, more spacing.
+*/
+
+.root {
+    -fx-font-family: "Comic Sans MS", "Verdana", sans-serif;
+    -fx-font-size: 20px;
+}
+
+/* Warm cream background instead of blue-peach gradient */
+.root-bg {
+    -fx-background-color: #FFFBF0;
+}
+
+.start-panel {
+    -fx-background-color: rgba(255, 252, 230, 0.96);
+    -fx-effect: dropshadow(gaussian, rgba(120, 80, 20, 0.15), 28, 0, 0, 8);
+}
+
+.title-label {
+    -fx-font-size: 44px;
+}
+
+.subtitle-label {
+    -fx-font-size: 24px;
+}
+
+/* Slightly taller buttons so text has more breathing room */
+.game-button {
+    -fx-font-size: 24px;
+    -fx-min-height: 76px;
+    -fx-line-spacing: 2;
+}
+
+.dyslexia-toggle {
+    -fx-font-size: 17px;
+    -fx-min-height: 52px;
+}
+
+/* Game labels */
+.instruction-label {
+    -fx-font-size: 24px;
+    -fx-background-color: rgba(255, 252, 230, 0.90);
+}
+
+.status-label {
+    -fx-font-size: 28px;
+    -fx-background-color: rgba(255, 252, 230, 0.90);
+}
+
+.round-label {
+    -fx-font-size: 22px;
+}
+
+/* End screen */
+.end-panel {
+    -fx-background-color: rgba(255, 252, 230, 0.96);
+    -fx-effect: dropshadow(gaussian, rgba(120, 80, 20, 0.15), 28, 0, 0, 8);
+}
+
+.end-title {
+    -fx-font-size: 58px;
+}
+
+.end-earned {
+    -fx-font-size: 32px;
+}
+
+.end-total {
+    -fx-font-size: 24px;
+}
+
+.end-star {
+    -fx-font-size: 56px;
+}
+
+.replay-button {
+    -fx-font-size: 24px;
+    -fx-min-height: 68px;
+}
+
+.menu-button {
+    -fx-font-size: 24px;
+    -fx-min-height: 68px;
+}

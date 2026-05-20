@@ -45,11 +45,18 @@ public class SceneManager {
     }
 
     private static void switchTo(Parent root) {
-        String css = SceneManager.class
-                .getResource("/hr/adhd/igrica/styles/main.css")
-                .toExternalForm();
         Scene scene = new Scene(root, 900, 670);
-        scene.getStylesheets().add(css);
+
+        scene.getStylesheets().add(SceneManager.class
+                .getResource("/hr/adhd/igrica/styles/main.css")
+                .toExternalForm());
+
+        if (Settings.isDyslexiaMode()) {
+            scene.getStylesheets().add(SceneManager.class
+                    .getResource("/hr/adhd/igrica/styles/dyslexia.css")
+                    .toExternalForm());
+        }
+
         root.setOpacity(0);
         stage.setScene(scene);
         FadeTransition ft = new FadeTransition(Duration.millis(200), root);

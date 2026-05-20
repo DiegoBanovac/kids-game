@@ -3,7 +3,6 @@ package hr.adhd.igrica.games;
 import hr.adhd.igrica.util.AudioManager;
 import hr.adhd.igrica.util.GameSession;
 import hr.adhd.igrica.util.GameType;
-import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -92,9 +91,7 @@ public class ColorSequenceGame extends BaseGame {
     public void startGame() {
         sequence.add(rng.nextInt(4));
         sequence.add(rng.nextInt(4));
-        PauseTransition delay = new PauseTransition(Duration.millis(700));
-        delay.setOnFinished(e -> playSequence());
-        delay.play();
+        delay(Duration.millis(700), this::playSequence).play();
     }
 
     @Override
@@ -123,14 +120,10 @@ public class ColorSequenceGame extends BaseGame {
         circles[ci].setFill(BRIGHT[ci]);
         audioManager.playClick();
 
-        PauseTransition hold = new PauseTransition(Duration.millis(520));
-        hold.setOnFinished(e -> {
+        delay(Duration.millis(520), () -> {
             circles[ci].setFill(NORMAL[ci]);
-            PauseTransition gap = new PauseTransition(Duration.millis(280));
-            gap.setOnFinished(e2 -> playNextFlash(idx + 1));
-            gap.play();
-        });
-        hold.play();
+            delay(Duration.millis(280), () -> playNextFlash(idx + 1)).play();
+        }).play();
     }
 
     private void handleClick(int ci) {
@@ -149,32 +142,26 @@ public class ColorSequenceGame extends BaseGame {
                 playerTurn = false;
                 roundsDone++;
                 starSystem.addStars(1);
-                statusLabel.setText("✓ Tocno! Bravo! ★");
+                statusLabel.setText("✓ Točno! Bravo! ★");
 
                 if (roundsDone == TOTAL_ROUNDS) {
-                    PauseTransition end = new PauseTransition(Duration.millis(900));
-                    end.setOnFinished(e -> finishGame());
-                    end.play();
+                    delay(Duration.millis(900), this::finishGame).play();
                 } else {
                     sequence.add(rng.nextInt(4));
-                    PauseTransition next = new PauseTransition(Duration.millis(1100));
-                    next.setOnFinished(e -> playSequence());
-                    next.play();
+                    delay(Duration.millis(1100), this::playSequence).play();
                 }
             }
         } else {
             // wrong input
             playerTurn = false;
             audioManager.playWrong();
-            statusLabel.setText("✗ Netocno! Gledaj ponovo...");
+            statusLabel.setText("✗ Netočno! Gledaj ponovo...");
             for (Circle c : circles) c.setFill(Color.web("#FFCDD2"));
 
-            PauseTransition retry = new PauseTransition(Duration.millis(1000));
-            retry.setOnFinished(e -> {
+            delay(Duration.millis(1000), () -> {
                 for (int i = 0; i < circles.length; i++) circles[i].setFill(NORMAL[i]);
                 playSequence();
-            });
-            retry.play();
+            }).play();
         }
     }
 

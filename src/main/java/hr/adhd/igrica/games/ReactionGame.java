@@ -11,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class ReactionGame extends BaseGame {
         roundLabel = new Label("Runda 1 / " + ROUNDS);
         roundLabel.getStyleClass().add("round-label");
 
-        feedbackLabel = new Label("Klikni zvjezdicu što brže možeš!");
+        feedbackLabel = new Label("Klikni zvjezdicu što brže možeš! ★");
         feedbackLabel.getStyleClass().add("status-label");
 
         starLabel = new Label("★");
@@ -74,9 +73,7 @@ public class ReactionGame extends BaseGame {
 
     @Override
     public void startGame() {
-        PauseTransition delay = new PauseTransition(Duration.millis(600));
-        delay.setOnFinished(e -> nextRound());
-        delay.play();
+        delay(Duration.millis(600), this::nextRound).play();
     }
 
     @Override
@@ -96,11 +93,8 @@ public class ReactionGame extends BaseGame {
         feedbackLabel.setText("Spremi se...");
         starLabel.setVisible(false);
 
-        // random delay 800-2200ms before showing star
-        int delay = 800 + rng.nextInt(1400);
-        PauseTransition pre = new PauseTransition(Duration.millis(delay));
-        pre.setOnFinished(e -> showStar());
-        pre.play();
+        int waitMs = 800 + rng.nextInt(1400);
+        delay(Duration.millis(waitMs), this::showStar).play();
     }
 
     private void showStar() {
@@ -118,8 +112,7 @@ public class ReactionGame extends BaseGame {
         feedbackLabel.setText("Klikni! ★");
         roundStart = System.currentTimeMillis();
 
-        timeout = new PauseTransition(Duration.millis(TIMEOUT_MS));
-        timeout.setOnFinished(e -> handleMiss());
+        timeout = delay(Duration.millis(TIMEOUT_MS), this::handleMiss);
         timeout.play();
     }
 
@@ -141,23 +134,19 @@ public class ReactionGame extends BaseGame {
         starSystem.addStars(1);
         feedbackLabel.setText("✓ " + rt + " ms! Bravo!");
 
-        PauseTransition gap = new PauseTransition(Duration.millis(600));
-        gap.setOnFinished(e -> {
+        delay(Duration.millis(600), () -> {
             starLabel.setVisible(false);
             nextRound();
-        });
-        gap.play();
+        }).play();
     }
 
     private void handleMiss() {
         reactionTimes.add(TIMEOUT_MS);
         starLabel.setVisible(false);
         audioManager.playWrong();
-        feedbackLabel.setText("Presporo! Pokusaj brze!");
+        feedbackLabel.setText("Presporo! Pokušaj brže!");
 
-        PauseTransition gap = new PauseTransition(Duration.millis(800));
-        gap.setOnFinished(e -> nextRound());
-        gap.play();
+        delay(Duration.millis(800), this::nextRound).play();
     }
 
     private void finishGame() {

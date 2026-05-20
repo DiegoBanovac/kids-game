@@ -4,6 +4,7 @@ hr\adhd\igrica\games\MemoryGame.class
 hr\adhd\igrica\util\AudioManager.class
 hr\adhd\igrica\games\MemoryGame$CardData.class
 hr\adhd\igrica\screens\StartScreen.class
+hr\adhd\igrica\util\Settings.class
 hr\adhd\igrica\util\SceneManager$1.class
 hr\adhd\igrica\util\SceneManager.class
 hr\adhd\igrica\util\TtsManager.class
